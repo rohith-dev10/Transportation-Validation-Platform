@@ -163,7 +163,7 @@ router.get('/confirm/:token', async (req, res) => {
 
         jwt.sign(
             payload,
-            config.get('jwtSecret'),
+            process.env.jwt,
             { expiresIn: 360000 },
             (err, token) => {
                 if (err) throw err;
@@ -202,7 +202,7 @@ router.post('/login', async (req, res) => {
 
         jwt.sign(
             payload,
-            config.get('jwtSecret'),
+            process.env.jwt,
             { expiresIn: 360000 },
             (err, token) => {
                 if (err) throw err;
