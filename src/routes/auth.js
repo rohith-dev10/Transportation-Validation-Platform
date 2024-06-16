@@ -118,7 +118,7 @@ router.post('/signup', async (req, res) => {
 
         await user.save();
 
-        const confirmUrl = `http://localhost:3000/confirm/${user.confirmationToken}`;
+        const confirmUrl = `https://transportation-validation-frontend-qdzn8ibz4.vercel.app/confirm/${user.confirmationToken}`;
 
         const mailOptions = {
             from: process.env.email,
