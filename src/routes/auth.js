@@ -118,7 +118,7 @@ router.post('/signup', async (req, res) => {
 
         await user.save();
 
-        const confirmUrl = `https://transportation-validation-frontend-qdzn8ibz4.vercel.app/confirm/${user.confirmationToken}`;
+        const confirmUrl = `${process.env.baseurl}/confirm/${user.confirmationToken}`;
 
         const mailOptions = {
             from: process.env.email,
@@ -196,7 +196,7 @@ router.post('/login', async (req, res) => {
                 id: user.id
             }
         };
-
+        let isProfileUpdated=user.isProfileUpdated
         let isProfiledataUpdated = user.relatedTypeId === null ? false : true
         let isVerified = user.isEmailConfirmed
 
@@ -206,7 +206,7 @@ router.post('/login', async (req, res) => {
             { expiresIn: 360000 },
             (err, token) => {
                 if (err) throw err;
-                res.json({ token, isProfiledataUpdated, userId: user.id, isVerified });
+                res.json({ token, isProfileUpdated, isProfiledataUpdated, userId: user.id, isVerified });
             }
         );
     } catch (err) {

@@ -7,7 +7,6 @@ const TruckOwnerSchema = new mongoose.Schema({
         required: true
     },
     companyName: String,
-    contact: String,
     maintenanceAPI: String,
     ownershipDuration: String
 });

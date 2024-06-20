@@ -6,6 +6,45 @@ const TruckOwner = require('../models/TruckOwner');
 const Driver = require('../models/Driver');
 const Company = require('../models/Company');
 
+// GET /api/user/profile/:userId - Get user profile data
+router.get('/profile/:userId', auth, async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        res.status(200).json(user);
+    } catch (error) {
+        console.error('Error fetching user profile:', error);
+        res.status(500).json({ error: 'Failed to fetch user profile' });
+    }
+});
+
+// POST /api/user/profile/:userId - Update user profile
+router.post('/profile/:userId', auth, async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const updatedData = req.body;
+
+        const user = await User.findByIdAndUpdate(userId, updatedData, { new: true });
+        
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        user.isProfileUpdated = true;
+        await user.save();
+
+        res.status(200).json({"msg": "User profile updated successfully"});
+    } catch (error) {
+        console.error('Error updating user profile:', error);
+        res.status(500).json({ error: 'Failed to update user profile' });
+    }
+});
+
+
 // Get profile data
 router.get('/:userId', auth, async (req, res) => {
     const userId = req.params.userId;

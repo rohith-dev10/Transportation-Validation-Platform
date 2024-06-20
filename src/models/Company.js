@@ -7,7 +7,6 @@ const CompanySchema = new mongoose.Schema({
         required: true
     },
     companyName: String,
-    contact: String,
     telematicsAPI: String,
     crmAPI: String,
     fleetSize: Number

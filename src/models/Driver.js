@@ -7,7 +7,6 @@ const DriverSchema = new mongoose.Schema({
         required: true
     },
     licenseNumber: String,
-    contact: String,
     drivingHistory: String
 });
 
